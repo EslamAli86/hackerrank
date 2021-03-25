@@ -1,0 +1,18 @@
+https://www.hackerrank.com/challenges/the-birthday-bar/problem
+
+# Complete the birthday function below.
+def birthday(s, d, m):
+    count = 0
+    
+    for i in range(0, len(s) - m + 1):
+        sum_d = 0
+        for j in range(i, i + m):
+            sum_d += s[j]
+            if sum_d == d and j-i+1 == m:
+                count += 1
+                break
+            if sum_d > d:
+                break
+    return count
+
+    
