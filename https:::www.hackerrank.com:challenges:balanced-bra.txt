@@ -1,0 +1,25 @@
+https://www.hackerrank.com/challenges/balanced-brackets/problem
+
+# Complete the isBalanced function below.
+def isBalanced(s):
+    stack = LifoQueue()
+    n = len(s)
+    
+    for i in range(0, n):
+        char = s[i]
+        if char == '{' or char == '(' or char == '[':
+            stack.put(char)
+        else:
+            if stack.empty():
+                return 'NO'
+            last = stack.get()
+            if char == '}' and last != '{':
+                return 'NO'
+            if char == ']' and last != '[':
+                return 'NO'
+            if char == ')' and last != '(':
+                return 'NO'
+    if not stack.empty():
+            return 'NO'
+    return 'YES'
+

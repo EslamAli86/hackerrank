@@ -1,0 +1,12 @@
+https://www.hackerrank.com/challenges/ctci-array-left-rotation/problem
+
+def rotLeft(a, d):
+    n = len(a)
+    rotated = [0] * n
+    for i in range(0, n):
+        new_i = i - d
+        if new_i >= 0:
+            rotated[new_i] = a[i]
+        else:
+            rotated[n + new_i] = a[i]
+    return rotated#np.asarray( rotated )

@@ -1,0 +1,15 @@
+https://www.hackerrank.com/challenges/detect-whether-a-linked-list-contains-a-cycle/problem
+
+def has_cycle(head):
+    if head != None and head.next == head:
+        return 1
+    pointers = list()
+    
+    current = head
+    while current != None:
+        pointers.append(current)
+        for i in range(0, len(pointers)):
+            if current.next == pointers[i]:
+                return 1
+        current = current.next
+    return 0
