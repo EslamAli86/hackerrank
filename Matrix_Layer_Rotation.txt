@@ -1,0 +1,61 @@
+https://www.hackerrank.com/challenges/matrix-rotation-algo/
+
+def rotate(matrix, r_s, r_e, c_s, c_e):
+    corner_top_left = matrix[r_s][c_s]
+    corner_top_right = matrix[r_s][c_e]
+    corner_bottom_left = matrix[r_e][c_s]
+    corner_bottom_right = matrix[r_e][c_e]
+    
+    # rotate left most column
+    for r in range(r_e, r_s, -1):
+        matrix[r][c_s] = matrix[r - 1][c_s]
+    matrix[r_s + 1][c_s] = corner_top_left
+    
+    # rotate bottom most row
+    for c in range(c_e, c_s, -1):
+        matrix[r_e][c] = matrix[r_e][c - 1]
+    matrix[r_e][c_s + 1] = corner_bottom_left
+    
+    # rotate right most column
+    for r in range(r_s, r_e):
+        matrix[r][c_e] = matrix[r + 1][c_e]
+    matrix[r_e - 1][c_e] = corner_bottom_right
+    
+    # rotate top most row
+    for c in range(c_s, c_e):
+        matrix[r_s][c] = matrix[r_s][c + 1]
+    matrix[r_s][c_e - 1] = corner_top_right
+    return
+
+# Complete the matrixRotation function below.
+def matrixRotation(matrix, r):
+    width = len(matrix[0])
+    height = len(matrix)
+    
+    count = 0
+    row_start = 0
+    row_end = len(matrix) - 1
+    col_start = 0
+    col_end = len(matrix[0]) - 1
+    r_new = 0
+    while row_start < row_end and col_start < col_end:
+        rows = height - 2*count
+        cols = width - 2*count
+        r_new = r % ((2 * cols) + (2 * rows) - 4)
+        # rotate r times
+        for _ in range(r_new):
+            rotate(matrix, row_start, row_end, col_start, col_end)
+                #
+        row_start += 1
+        row_end -= 1
+        col_start += 1
+        col_end -= 1
+        count += 1
+    
+    # print the rotated matrix
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            if j != len(matrix[0]) - 1:
+                print(str(matrix[i][j]) + ' ', end='')
+            else:
+                print(matrix[i][j])
