@@ -1,0 +1,26 @@
+https://www.hackerrank.com/challenges/organizing-containers-of-balls/problem
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the organizingContainers function below.
+def organizingContainers(container):
+    print(container)
+    containers = list()
+    balls = list()
+    
+    containers = [ sum(x) for x in container ]
+    balls = [ sum(x) for x in zip(*container) ]
+    
+    containers.sort()
+    balls.sort()
+    
+    for i in range(len(container)):
+        if containers[i] != balls[i]:
+            return 'Impossible'
+    return 'Possible'
